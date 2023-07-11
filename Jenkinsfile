@@ -11,15 +11,6 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                         env.TIMESTAMP = new SimpleDateFormat("yyyy-MM-dd'T'HH-mm-ssXXX").format(new Date())
-                        env.TAG = sh (
-                            script: 'git -c \'versionsort.suffix=-\' ls-remote --exit-code --refs --sort=\'version:refname\'  --tags  https://$GIT_PASSWORD@github.com/serignemodou/devops.git | tail -n1 | sed \'s/.*\\///; s/\\^{}//\'',
-                            returnStdout: true
-                        ).trim()
-                        int len = ((env.TAG).length())
-                        env.VERSION = env.TAG.substring(0,len)
-                        if (env.TAG ==""){
-                            env.TAG  = "0.0.0"
-                        }
                     }
                 }
             }
