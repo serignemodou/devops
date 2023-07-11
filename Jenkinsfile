@@ -36,7 +36,7 @@ pipeline {
                      }
                         sh 'docker build --build-arg ENVIRONMENT=dev  --no-cache -t smodou/devops/nginx01:1.0.0 .'
                         sh 'docker tag smodou/devops/nginx01:1.0.0 smodou/devops/nginx01:latest'
-                        sh 'docker push smodou/devops/nginx01:1.0.0
+                        sh 'docker push smodou/devops/nginx01:1.0.0'
                         sh 'docker rmi -f smodou/devops/nginx01:1.0.0 || true'
                         sh 'docker rmi -f $(docker images -q --filter "dangling=true") || true'
                     }
