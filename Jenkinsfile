@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat
 
 pipeline {
     stages {
+        agent any
         stage ("init"){
             agent any
             steps {
