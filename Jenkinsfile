@@ -3,8 +3,8 @@ import java.time.*
 import java.text.SimpleDateFormat
 
 pipeline {
+    agent none
     stages {
-        agent none
         stage ("init"){
             agent any
             steps {
