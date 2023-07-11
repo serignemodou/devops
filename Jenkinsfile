@@ -3,7 +3,6 @@ import java.time.*
 import java.text.SimpleDateFormat
 
 pipeline {
-    agent none
     stages {
         stage ("init"){
             agent any
@@ -30,6 +29,7 @@ pipeline {
                     when {
                         branch 'main'
                     }
+                    agent any
                     steps {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-token', passwordVariable: 'password', usernameVariable: 'username')]) {
                        sh 'docker login -u $username -p $password'
