@@ -22,7 +22,9 @@ pipeline {
                     when {
                         branch 'main'
                     }
-                    agent any
+                    agent {
+                        label 'dockeragent'
+                    }
                     steps {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-token', passwordVariable: 'password', usernameVariable: 'username')]) {
                        sh 'docker login -u $username -p $password'
