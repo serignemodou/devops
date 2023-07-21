@@ -13,7 +13,7 @@ pipeline {
                      //   env.TIMESTAMP = new SimpleDateFormat("yyyy-MM-dd'T'HH-mm-ssXXX").format(new Date())
                     //}
                // }
-                git credentialsId: 'github-token', branch: "main", url: 'https://github.com/beopencloud/internals-cno-cicd.git'
+                git credentialsId: 'github-token', branch: "main", url: 'https://github.com/serignemodou/devops.git'
             }
         }
         stage ('pipeline-ci-cd'){
