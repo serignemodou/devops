@@ -25,7 +25,7 @@ pipeline {
                         branch 'main'
                     }
                     agent {
-                       label 'dockeragent'  
+                       docker { image 'node:18.16.0-alpine' } 
                     }
                     steps {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-token', passwordVariable: 'password', usernameVariable: 'username')]) {
