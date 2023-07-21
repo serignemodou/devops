@@ -5,8 +5,10 @@ import java.text.SimpleDateFormat
 pipeline {
     agent none
     stages {
-        stage ("init"){
-            agent any
+        stage ("init"){ 
+          agent {
+             label 'dockeragent'  
+           }
             steps {
               //  script {
                    // withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
@@ -23,7 +25,7 @@ pipeline {
                         branch 'main'
                     }
                     agent {
-                        label 'dockeragent'
+                       label 'dockeragent'  
                     }
                     steps {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-token', passwordVariable: 'password', usernameVariable: 'username')]) {
