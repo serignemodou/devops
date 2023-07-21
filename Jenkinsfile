@@ -8,11 +8,12 @@ pipeline {
         stage ("init"){
             agent any
             steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                        env.TIMESTAMP = new SimpleDateFormat("yyyy-MM-dd'T'HH-mm-ssXXX").format(new Date())
-                    }
-                }
+              //  script {
+                   // withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                     //   env.TIMESTAMP = new SimpleDateFormat("yyyy-MM-dd'T'HH-mm-ssXXX").format(new Date())
+                    //}
+               // }
+                git credentialsId: 'github-token', branch: "main", url: 'https://github.com/beopencloud/internals-cno-cicd.git'
             }
         }
         stage ('pipeline-ci-cd'){
