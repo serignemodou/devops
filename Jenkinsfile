@@ -31,6 +31,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-token', passwordVariable: 'password', usernameVariable: 'username')]) {
                        sh 'docker login -u $username -p $password'
                      }
+                        sh 'docker version'
                         sh 'docker build --build-arg ENVIRONMENT=dev  --no-cache -t smodou/devops/nginx01:1.0.0 .'
                         sh 'docker tag smodou/devops/nginx01:1.0.0 smodou/devops/nginx01:latest'
                         sh 'docker push smodou/devops/nginx01:1.0.0'
