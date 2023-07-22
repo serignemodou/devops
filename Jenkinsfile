@@ -6,9 +6,7 @@ pipeline {
     agent none
     stages {
         stage ("init"){ 
-          agent {
-             label 'dockeragent'  
-           }
+          agent any
             steps {
               //  script {
                    // withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
@@ -25,18 +23,18 @@ pipeline {
                         branch 'main'
                     }
                     agent {
-                       docker { image 'node:18.16.0-alpine' } 
+                      label 'dockeragent'  
                     }
                     steps {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-token', passwordVariable: 'password', usernameVariable: 'username')]) {
                        sh 'docker login -u $username -p $password'
                      }
-                        sh 'node --version'
-                        sh 'docker build --build-arg ENVIRONMENT=dev  --no-cache -t smodou/devops/nginx01:1.0.0 .'
-                        sh 'docker tag smodou/devops/nginx01:1.0.0 smodou/devops/nginx01:latest'
-                        sh 'docker push smodou/devops/nginx01:1.0.0'
-                        sh 'docker rmi -f smodou/devops/nginx01:1.0.0 || true'
-                        sh 'docker rmi -f $(docker images -q --filter "dangling=true") || true'
+                        sh 'docker --version'
+                      //  sh 'docker build --build-arg ENVIRONMENT=dev  --no-cache -t smodou/devops/nginx01:1.0.0 .'
+                       // sh 'docker tag smodou/devops/nginx01:1.0.0 smodou/devops/nginx01:latest'
+                       // sh 'docker push smodou/devops/nginx01:1.0.0'
+                       // sh 'docker rmi -f smodou/devops/nginx01:1.0.0 || true'
+                       // sh 'docker rmi -f $(docker images -q --filter "dangling=true") || true'
                     }
                 }
             }
